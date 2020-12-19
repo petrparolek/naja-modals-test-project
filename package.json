@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
+    "live-form-validation": "https://github.com/contributte/live-form-validation.git",
+    "naja": "^2.0.1",
+    "nette-forms": "~3.0.0",
+    "popper.js": "^1.14.7"
+  }
+}

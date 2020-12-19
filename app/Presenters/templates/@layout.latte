@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{$basePath}/node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
+</head>
+<body>
+
+<main role="main" class="flex-shrink-0">
+	<div class="container">
+		<div class="jumbotron mt-3">
+			<h1>Form test</h1>
+			{include #content}
+		</div>
+	</div>
+</main>
+
+{snippet modal}
+    {if $presenter->isAjax()}
+        {ifset #modal}
+            <!-- Modal -->
+            <div class="modal fade modal-ajax" id="myModal" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">{block |stripHtml}{include #title}{/block}</h4>
+
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {include #modal}
+                        </div>
+                        {ifset #modalFooter}
+                            <div class="modal-footer">
+                                {include #modalFooter}
+                            </div>
+                        {/ifset}
+                    </div>
+                    <!-- /.modal-content-->
+                </div>
+                <!-- /.modal-dialog-->
+            </div>
+            <!-- /.modal-->
+        {/ifset}
+    {/if}
+{/snippet}
+
+<script src="{$basePath}/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="{$basePath}/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="{$basePath}/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

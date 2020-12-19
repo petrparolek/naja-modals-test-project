@@ -1,0 +1,3 @@
+app/config/local.neon
+vendor
+www/node_modules
