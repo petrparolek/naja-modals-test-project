@@ -1,6 +1,5 @@
 class ModalExtension {
-    constructor(naja, $) {
-        console.log('constructor');
+    initialize(naja) {
         naja.addEventListener('complete', this.openModal.bind(this));
     }
 
