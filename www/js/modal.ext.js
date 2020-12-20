@@ -1,16 +1,17 @@
+/* global naja, $, intervalFunction */
 class ModalExtension {
     initialize(naja) {
         naja.addEventListener('complete', this.openModal.bind(this));
     }
 
-    openModal({xhr, response, options}) {
-        if (response === null || !response.hasOwnProperty('modalId')) {
+    openModal(event) {
+        let payload = event.detail.payload;
+
+        if (payload === null || !payload.hasOwnProperty('modalId')) {
             return;
         }
-        let modalId = response.modalId;
-        let showModal = response.showModal;
-        console.log(modalId);
-        console.log(showModal);
+        let modalId = payload.modalId;
+        let showModal = payload.showModal;
         if (showModal === undefined || showModal === false) {
             return;
         }
