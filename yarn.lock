@@ -2,20 +2,17 @@
 # yarn lockfile v1
 
 
-abortcontroller-polyfill@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/abortcontroller-polyfill/-/abortcontroller-polyfill-1.5.0.tgz#2c562f530869abbcf88d949a2b60d1d402e87a7c"
-  integrity sha512-O6Xk757Jb4o0LMzMOMdWvxpHWrQzruYBaUruFaIOfAQRnWFxfdXYobw12jrVHGtoXk6WiiyYzc0QWN9aL62HQA==
+"@babel/runtime@^7.18.3":
+  version "7.19.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.0.tgz#22b11c037b094d27a8a2504ea4dcff00f50e2259"
+  integrity sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA==
+  dependencies:
+    regenerator-runtime "^0.13.4"
 
 bootstrap@^4.5.3:
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.5.3.tgz#c6a72b355aaf323920be800246a6e4ef30997fe6"
   integrity sha512-o9ppKQioXGqhw8Z7mah6KdTYpNQY//tipnkxppWhPbiSWdD+1raYsnhwEZjkTHYbGee4cVQ0Rx65EhOY/HNLcQ==
-
-event-target-shim@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
-  integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
 jquery@^3.5.1:
   version "3.5.1"
@@ -26,13 +23,12 @@ jquery@^3.5.1:
   version "1.9.0"
   resolved "https://github.com/contributte/live-form-validation.git#9f98281ab33a167c4d5d7c5f19e4a2ecf8a0f629"
 
-naja@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/naja/-/naja-2.0.1.tgz#655cd8dd62bb6fa5c00def3b551a1144f8401b07"
-  integrity sha512-CNku1hOJ3hl2vi0c2wY0kPEojEHsbPjtQp+IblGkXYg/1tGfIC3AXch16nkywH9sX8klLB65s20/YF9vd72EMQ==
+naja@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/naja/-/naja-2.4.0.tgz#c31ffbc8d68d95d28a6d7e7da00f85be77d657aa"
+  integrity sha512-rHcj411CXlnopYK8wCbmRWEDSXcUFR2rFW+K7hMLfj1uEs6uDo8y207LOV7z+9zhgPhCmeGfasybcqn22+wCpg==
   dependencies:
-    abortcontroller-polyfill "^1.5.0"
-    event-target-shim "^5.0.1"
+    "@babel/runtime" "^7.18.3"
 
 nette-forms@~3.0.0:
   version "3.0.6"
@@ -43,3 +39,8 @@ popper.js@^1.14.7:
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
   integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
+
+regenerator-runtime@^0.13.4:
+  version "0.13.9"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"
+  integrity sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==
