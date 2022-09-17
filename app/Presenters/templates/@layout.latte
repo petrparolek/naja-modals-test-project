@@ -72,5 +72,15 @@
         history: false,
     }));
 </script>
+<script>
+    naja.addEventListener('success', event => {
+        //console.log(event.detail.payload);
+        if (event.detail.payload.showModal === false) {
+            //console.log('ffcfc');
+            $('.modal').modal('hide');
+            naja.makeRequest('GET', {link refresh!})
+        }
+    });
+</script>
 </body>
 </html>

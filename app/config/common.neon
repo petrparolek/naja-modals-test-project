@@ -14,3 +14,10 @@ session:
 
 services:
     router: App\Router\RouterFactory::createRouter
+
+database:
+    dsn: 'mysql:host=%database.host%;dbname=%database.dbname%'
+    user: %database.user%
+    password: %database.password%
+    options:
+        lazy: true
