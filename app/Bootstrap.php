@@ -19,11 +19,14 @@ class Bootstrap
 		$configurator->setTimeZone('Europe/Prague');
 		$configurator->setTempDirectory(__DIR__ . '/../temp');
 
+		@mkdir(__DIR__ . '/../temp/sessions', 0777);
+
 		$configurator->createRobotLoader()
 			->addDirectory(__DIR__)
 			->register();
 
 		$configurator->addConfig(__DIR__ . '/config/common.neon');
+		$configurator->addConfig(__DIR__ . '/config/local.neon');
 
 		return $configurator;
 	}

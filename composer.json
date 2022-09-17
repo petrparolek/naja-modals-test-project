@@ -19,10 +19,32 @@
 		"nette/security": "^3.1",
 		"nette/utils": "^3.0",
 		"latte/latte": "^3.0",
-		"tracy/tracy": "^2.9"
+		"tracy/tracy": "^2.9",
+		"contributte/neonizer": "^0.5.0"
 	},
 	"require-dev": {
 		"nette/tester": "^2.0"
+	},
+	"scripts": {
+		"set-config": [
+			"Contributte\\Neonizer\\NeonizerExtension::set"
+		],
+		"post-install-cmd": [
+			"Contributte\\Neonizer\\NeonizerExtension::process"
+		],
+		"post-update-cmd": [
+			"Contributte\\Neonizer\\NeonizerExtension::process"
+		]
+	},
+	"extra": {
+		"neonizer": {
+			"files": [
+				{
+					"dist-file": "app/config/local_template.neon",
+					"file": "app/config/local.neon"
+				}
+			]
+		}
 	},
 	"autoload": {
 		"psr-4": {

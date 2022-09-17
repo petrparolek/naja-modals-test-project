@@ -1,0 +1,52 @@
+version: '3.3'
+
+services:
+  web:
+    image: registry.gitlab.com/webnazakazku/prebuild-php:8.0-apache
+    volumes:
+      - ./:/var/www/html
+      - ./.docker/apache/sites-enabled:/etc/apache2/sites-enabled
+      - ./.docker/cache:/cache
+    ports:
+      - '80:80'
+    environment:
+      MYSQL_HOST: database
+      MYSQL_USER: naja-modals-test-project
+      MYSQL_DATABASE: naja-modals-test-project
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+
+  database:
+    image: mariadb:latest
+    volumes:
+      - ./.docker/database/data:/var/lib/mysql
+      - ./.docker/database/initDb.sql:/docker-entrypoint-initdb.d/initDb.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: naja-modals-test-project
+      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: naja-modals-test-project
+
+  adminer:
+    image: adminer:4.6
+    ports:
+      - '8081:8080'
+    environment:
+      ADMINER_DEFAULT_SERVER: database
+
+  console:
+    image: ghcr.io/webnazakazku/docker-php-build:8.0
+    entrypoint: /tmp/entrypoint.sh
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./.docker/cache:/cache
+      - ./.docker/console/root:/root
+      - ./.docker/console/.bashrc:/tmp/.bashrc
+      - ./.docker/console/entrypoint.sh:/tmp/entrypoint.sh
+    environment:
+      MYSQL_HOST: database
+      MYSQL_USER: naja-modals-test-project
+      MYSQL_DATABASE: naja-modals-test-project
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root

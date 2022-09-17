@@ -1,0 +1,6 @@
+parameters:
+    database:
+        host: database
+        user: root
+        password: root
+        dbname: naja-modals-test-project
