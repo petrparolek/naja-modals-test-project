@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace App\Presenters;
 
@@ -9,14 +7,13 @@ use Nette\Application\Responses;
 use Nette\Http;
 use Tracy\ILogger;
 
-
 final class ErrorPresenter implements Nette\Application\IPresenter
 {
+
 	use Nette\SmartObject;
 
 	/** @var ILogger */
 	private $logger;
-
 
 	public function __construct(ILogger $logger)
 	{
@@ -40,4 +37,5 @@ final class ErrorPresenter implements Nette\Application\IPresenter
 			}
 		});
 	}
+
 }

@@ -1,11 +1,18 @@
 {
 	"name": "nette/web-project",
 	"description": "Nette: Standard Web Project",
-	"keywords": ["nette"],
+	"keywords": [
+		"nette"
+	],
 	"type": "project",
-	"license": ["MIT", "BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"license": [
+		"MIT",
+		"BSD-3-Clause",
+		"GPL-2.0",
+		"GPL-3.0"
+	],
 	"require": {
-		"php": ">= 7.1",
+		"php": ">= 7.3",
 		"nette/application": "^3.1",
 		"nette/bootstrap": "^3.1",
 		"nette/caching": "^3.1",
@@ -18,12 +25,13 @@
 		"nette/robot-loader": "^3.0",
 		"nette/security": "^3.1",
 		"nette/utils": "^3.0",
-		"latte/latte": "^3.0",
+		"latte/latte": "~2.10.0",
 		"tracy/tracy": "^2.9",
 		"contributte/neonizer": "^0.5.0"
 	},
 	"require-dev": {
-		"nette/tester": "^2.0"
+		"nette/tester": "^2.0",
+		"ninjify/qa": "^0.13"
 	},
 	"scripts": {
 		"set-config": [
@@ -35,6 +43,11 @@
 		"post-update-cmd": [
 			"Contributte\\Neonizer\\NeonizerExtension::process"
 		]
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
 	},
 	"extra": {
 		"neonizer": {

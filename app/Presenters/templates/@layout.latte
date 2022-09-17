@@ -13,19 +13,19 @@
 <body>
 
 <main role="main" class="flex-shrink-0">
-	<div class="container">
+    <div class="container">
         {snippet flashes}
-        <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type} alert-dismissible fade show" role="alert">
-            {$flash->message}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type} alert-dismissible fade show" role="alert">
+                {$flash->message}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         {/snippet}
-		<div class="jumbotron mt-3">
-			{include #content}
-		</div>
-	</div>
+        <div class="jumbotron mt-3">
+            {include #content}
+        </div>
+    </div>
 </main>
 
 {snippet modal}

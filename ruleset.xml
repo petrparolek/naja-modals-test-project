@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ruleset name="Acme">
+    <!-- Contributte Coding Standard -->
+    <rule ref="./vendor/ninjify/coding-standard/contributte.xml"/>
+
+    <arg name="cache" value="temp/phpcs/phpcs-cache"/>
+
+    <!-- Specific rules -->
+    <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+        <properties>
+            <property name="rootNamespaces" type="array" value="
+                app=>App,
+            "/>
+            <property name="extensions" type="array" value="php,phpt"/>
+        </properties>
+    </rule>
+</ruleset>

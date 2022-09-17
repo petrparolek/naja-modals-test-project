@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace App\Presenters;
 
@@ -17,32 +15,32 @@ final class HomepagePresenter extends Presenter
 	 */
 	public $database;
 
-    public function beforeRender()
-    {
-        if ($this->isAjax() && (bool)$this->getParameter('isModal')) {
-            bdump('isAjax');
-            $this->payload->showModal = true;
-            $this->payload->modalId = 'myModal';
-            $this->redrawControl("modal");
-        }
-    }
+	public function beforeRender()
+	{
+		if ($this->isAjax() && (bool) $this->getParameter('isModal')) {
+			bdump('isAjax');
+			$this->payload->showModal = true;
+			$this->payload->modalId = 'myModal';
+			$this->redrawControl('modal');
+		}
+	}
 
-    public function createComponentTestForm(): Form
-    {
-        $form = new Form();
+	public function createComponentTestForm(): Form
+	{
+		$form = new Form();
 
-        $form->addText('name', 'Název položky');
+		$form->addText('name', 'Název položky');
 
-		$form->addSubmit('ok','OK');
+		$form->addSubmit('ok', 'OK');
 
 		$form->getElementPrototype()->class('ajax');
 
 		$form->onSuccess[] = [$this, 'testFormSucceeded'];
 
-        $form->onRender[] = [$this, 'makeBootstrap4'];
+		$form->onRender[] = [$this, 'makeBootstrap4'];
 
-        return $form;
-    }
+		return $form;
+	}
 
 	public function testFormSucceeded(Form $form, Nette\Utils\ArrayHash $data): void
 	{
@@ -52,7 +50,7 @@ final class HomepagePresenter extends Presenter
 
 		if ($this->isAjax()) {
 			$this->payload->showModal = false;
-			$this->redrawControl("flashes");
+			$this->redrawControl('flashes');
 		} else {
 			$this->redirect('Homepage:default');
 		}
@@ -70,7 +68,7 @@ final class HomepagePresenter extends Presenter
 		$items = $this->database->table('items')->fetchPairs('id', 'name');
 		$form->addSelect('item', 'Položky', $items);
 
-		$form->addSubmit('ok','OK');
+		$form->addSubmit('ok', 'OK');
 
 		$form->onSuccess[] = [$this, 'itemsFormSucceeded'];
 
@@ -87,38 +85,40 @@ final class HomepagePresenter extends Presenter
 	}
 
 	public function makeBootstrap4(Form $form): void
-    {
-        $renderer = $form->getRenderer();
-        $renderer->wrappers['controls']['container'] = null;
-        $renderer->wrappers['pair']['container'] = 'div class="form-group row"';
-        $renderer->wrappers['pair']['.error'] = 'has-danger';
-        $renderer->wrappers['control']['container'] = 'div class=col-sm-9';
-        $renderer->wrappers['label']['container'] = 'div class="col-sm-3 col-form-label"';
-        $renderer->wrappers['control']['description'] = 'span class=form-text';
-        $renderer->wrappers['control']['errorcontainer'] = 'span class=form-control-feedback';
-        $renderer->wrappers['control']['.error'] = 'is-invalid';
+	{
+		$renderer = $form->getRenderer();
+		$renderer->wrappers['controls']['container'] = null;
+		$renderer->wrappers['pair']['container'] = 'div class="form-group row"';
+		$renderer->wrappers['pair']['.error'] = 'has-danger';
+		$renderer->wrappers['control']['container'] = 'div class=col-sm-9';
+		$renderer->wrappers['label']['container'] = 'div class="col-sm-3 col-form-label"';
+		$renderer->wrappers['control']['description'] = 'span class=form-text';
+		$renderer->wrappers['control']['errorcontainer'] = 'span class=form-control-feedback';
+		$renderer->wrappers['control']['.error'] = 'is-invalid';
 
-        foreach ($form->getControls() as $control) {
-            $type = $control->getOption('type');
-            if ($type === 'button') {
-                $control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-secondary');
-                $usedPrimary = true;
+		foreach ($form->getControls() as $control) {
+			$type = $control->getOption('type');
+			if ($type === 'button') {
+				$control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-secondary');
+				$usedPrimary = true;
 
-            } elseif (in_array($type, ['text', 'textarea', 'select'], true)) {
-                $control->getControlPrototype()->addClass('form-control');
+			} elseif (in_array($type, ['text', 'textarea', 'select'], true)) {
+				$control->getControlPrototype()->addClass('form-control');
 
-            } elseif ($type === 'file') {
-                $control->getControlPrototype()->addClass('form-control-file');
+			} elseif ($type === 'file') {
+				$control->getControlPrototype()->addClass('form-control-file');
 
-            } elseif (in_array($type, ['checkbox', 'radio'], true)) {
-                if ($control instanceof Nette\Forms\Controls\Checkbox) {
-                    $control->getLabelPrototype()->addClass('form-check-label');
-                } else {
-                    $control->getItemLabelPrototype()->addClass('form-check-label');
-                }
-                $control->getControlPrototype()->addClass('form-check-input');
-                $control->getSeparatorPrototype()->setName('div')->addClass('form-check');
-            }
-        }
-    }
+			} elseif (in_array($type, ['checkbox', 'radio'], true)) {
+				if ($control instanceof Nette\Forms\Controls\Checkbox) {
+					$control->getLabelPrototype()->addClass('form-check-label');
+				} else {
+					$control->getItemLabelPrototype()->addClass('form-check-label');
+				}
+
+				$control->getControlPrototype()->addClass('form-check-input');
+				$control->getSeparatorPrototype()->setName('div')->addClass('form-check');
+			}
+		}
+	}
+
 }
