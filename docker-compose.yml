@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   web:
-    image: registry.gitlab.com/webnazakazku/prebuild-php:8.0-apache
+    image: registry.gitlab.com/webnazakazku/prebuild-php:7.3-apache
     volumes:
       - ./:/var/www/html
       - ./.docker/apache/sites-enabled:/etc/apache2/sites-enabled
@@ -35,7 +35,7 @@ services:
       ADMINER_DEFAULT_SERVER: database
 
   console:
-    image: ghcr.io/webnazakazku/docker-php-build:8.0
+    image: ghcr.io/webnazakazku/docker-php-build:7.3
     entrypoint: /tmp/entrypoint.sh
     working_dir: /var/www/html
     volumes:
