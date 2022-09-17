@@ -15,7 +15,7 @@ final class HomepagePresenter extends Presenter
 	 */
 	public $database;
 
-	public function beforeRender()
+	public function beforeRender(): void
 	{
 		if ($this->isAjax() && (bool) $this->getParameter('isModal')) {
 			bdump('isAjax');
@@ -87,6 +87,7 @@ final class HomepagePresenter extends Presenter
 	public function makeBootstrap4(Form $form): void
 	{
 		$renderer = $form->getRenderer();
+		/* @phpstan-ignore-next-line */
 		$renderer->wrappers['controls']['container'] = null;
 		$renderer->wrappers['pair']['container'] = 'div class="form-group row"';
 		$renderer->wrappers['pair']['.error'] = 'has-danger';
@@ -99,7 +100,7 @@ final class HomepagePresenter extends Presenter
 		foreach ($form->getControls() as $control) {
 			$type = $control->getOption('type');
 			if ($type === 'button') {
-				$control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-secondary');
+				$control->getControlPrototype()->addClass(isset($usedPrimary) ? 'btn btn-primary' : 'btn btn-secondary');
 				$usedPrimary = true;
 
 			} elseif (in_array($type, ['text', 'textarea', 'select'], true)) {

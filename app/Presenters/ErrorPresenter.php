@@ -6,6 +6,7 @@ use Nette;
 use Nette\Application\Responses;
 use Nette\Http;
 use Tracy\ILogger;
+use function preg_match;
 
 final class ErrorPresenter implements Nette\Application\IPresenter
 {
@@ -20,22 +21,27 @@ final class ErrorPresenter implements Nette\Application\IPresenter
 		$this->logger = $logger;
 	}
 
-
-	public function run(Nette\Application\Request $request): Nette\Application\IResponse
+	public function run(Nette\Application\Request $request): Nette\Application\Response
 	{
-		$exception = $request->getParameter('exception');
+		$e = $request->getParameter('exception');
 
-		if ($exception instanceof Nette\Application\BadRequestException) {
+		if ($e instanceof Nette\Application\BadRequestException) {
+			// $this->logger->log("HTTP code {$e->getCode()}: {$e->getMessage()} in {$e->getFile()}:{$e->getLine()}", 'access');
 			[$module, , $sep] = Nette\Application\Helpers::splitName($request->getPresenterName());
-			return new Responses\ForwardResponse($request->setPresenterName($module . $sep . 'Error4xx'));
+			$errorPresenter = $module . $sep . 'Error4xx';
+
+			return new Responses\ForwardResponse($request->setPresenterName($errorPresenter));
 		}
 
-		$this->logger->log($exception, ILogger::EXCEPTION);
-		return new Responses\CallbackResponse(function (Http\IRequest $httpRequest, Http\IResponse $httpResponse): void {
-			if (preg_match('#^text/html(?:;|$)#', (string) $httpResponse->getHeader('Content-Type'))) {
-				require __DIR__ . '/templates/Error/500.phtml';
+		$this->logger->log($e, ILogger::EXCEPTION);
+
+		return new Responses\CallbackResponse(
+			static function (Http\IRequest $httpRequest, Http\IResponse $httpResponse): void {
+				if (preg_match('#^text/html(?:;|$)#', (string) $httpResponse->getHeader('Content-Type')) > 0) {
+					require __DIR__ . '/templates/Error/500.phtml';
+				}
 			}
-		});
+		);
 	}
 
 }
