@@ -2,7 +2,8 @@ version: '3.3'
 
 services:
   web:
-    image: registry.gitlab.com/webnazakazku/prebuild-php:7.3-apache
+    image: naja-modals-test-project_web
+    build: .docker/apache
     volumes:
       - ./:/var/www/html
       - ./.docker/apache/sites-enabled:/etc/apache2/sites-enabled
