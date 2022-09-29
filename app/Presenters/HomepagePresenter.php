@@ -15,10 +15,9 @@ final class HomepagePresenter extends Presenter
 	 */
 	public $database;
 
-	public function beforeRender(): void
+	public function actionEdit(): void
 	{
-		if ($this->isAjax() && (bool) $this->getParameter('isModal')) {
-			bdump('isAjax');
+		if ($this->isAjax()) {
 			$this->payload->showModal = true;
 			$this->payload->modalId = 'myModal';
 			$this->redrawControl('modal');
@@ -33,9 +32,7 @@ final class HomepagePresenter extends Presenter
 
 		$form->addSubmit('ok', 'OK');
 
-		$isModal = (bool) $this->getPresenter()->getParameter('isModal');
-
-		if ($isModal && $this->getPresenter()->isAjax()) {
+		if ($this->getPresenter()->isAjax()) {
 			$form->getElementPrototype()->class('ajax');
 		}
 
