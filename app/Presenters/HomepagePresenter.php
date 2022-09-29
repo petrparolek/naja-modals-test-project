@@ -33,13 +33,27 @@ final class HomepagePresenter extends Presenter
 
 		$form->addSubmit('ok', 'OK');
 
-		$form->getElementPrototype()->class('ajax');
+		$isModal = (bool) $this->getPresenter()->getParameter('isModal');
+
+		if ($isModal && $this->getPresenter()->isAjax()) {
+			$form->getElementPrototype()->class('ajax');
+		}
+
+		$form->onValidate[] = [$this, 'validateTestForm'];
 
 		$form->onSuccess[] = [$this, 'testFormSucceeded'];
 
 		$form->onRender[] = [$this, 'makeBootstrap4'];
 
 		return $form;
+	}
+
+	public function validateTestForm(Form $form, Nette\Utils\ArrayHash $values): void
+	{
+		if ($values->name === '') {
+			$form->addError('test');
+			$this->redrawControl('testForm');
+		}
 	}
 
 	public function testFormSucceeded(Form $form, Nette\Utils\ArrayHash $data): void
