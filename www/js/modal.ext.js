@@ -6,12 +6,14 @@ class ModalExtension {
 	}
 
 	handleInteraction(event) {
-		const dataHref = event.detail.element.dataset.href;
-		if (dataHref) {
+		const dataModal = event.detail.element.dataset.modal;
+		if (dataModal) {
 			event.preventDefault();
 
-			// Create request by hand with data-href URL
-			naja.makeRequest('GET', dataHref);
+			// Create request by hand adn set isModal to true
+			naja.makeRequest('GET', event.detail.element.href, {
+				isModal: true
+			});
 		}
 	}
 
