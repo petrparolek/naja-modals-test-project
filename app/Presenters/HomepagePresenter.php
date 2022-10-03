@@ -15,16 +15,6 @@ final class HomepagePresenter extends Presenter
 	 */
 	public $database;
 
-	public function beforeRender(): void
-	{
-		if ($this->isAjax() && (bool) $this->getParameter('isModal')) {
-			bdump('isAjax');
-			$this->payload->showModal = true;
-			$this->payload->modalId = 'myModal';
-			$this->redrawControl('modal');
-		}
-	}
-
 	public function createComponentTestForm(): Form
 	{
 		$form = new Form();
@@ -33,12 +23,6 @@ final class HomepagePresenter extends Presenter
 
 		$form->addSubmit('ok', 'OK');
 
-		$isModal = (bool) $this->getPresenter()->getParameter('isModal');
-
-		if ($isModal && $this->getPresenter()->isAjax()) {
-			$form->getElementPrototype()->class('ajax');
-		}
-
 		$form->onValidate[] = [$this, 'validateTestForm'];
 
 		$form->onSuccess[] = [$this, 'testFormSucceeded'];
@@ -46,6 +30,15 @@ final class HomepagePresenter extends Presenter
 		$form->onRender[] = [$this, 'makeBootstrap4'];
 
 		return $form;
+	}
+
+	public function actionEdit(): void
+	{
+		if ($this->isAjax()) {
+			$this->payload->modalActive = true;
+			$this['testForm']->getElementPrototype()->class[] = 'ajax';
+			$this->redrawControl();
+		}		
 	}
 
 	public function validateTestForm(Form $form, Nette\Utils\ArrayHash $values): void
@@ -63,16 +56,19 @@ final class HomepagePresenter extends Presenter
 		$this->flashMessage('Položka byla úspěně uložena', 'success');
 
 		if ($this->isAjax()) {
-			$this->payload->showModal = false;
-			$this->redrawControl('flashes');
+			$this->payload->modalActive = false;
+			$this->payload->modalRefreshUrl = $this->link('default');    		
+			$this->redrawControl();
 		} else {
 			$this->redirect('Homepage:default');
 		}
 	}
 
-	public function handleRefresh(): void
+	public function actionDefault(): void
 	{
-		$this->redrawControl('items');
+		if ($this->isAjax()) {
+			$this->redrawControl('items');
+		}
 	}
 
 	public function createComponentItemsForm(): Form
