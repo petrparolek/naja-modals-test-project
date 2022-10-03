@@ -8,9 +8,9 @@
     {control itemsForm}
 {/snippet}
 
-<a n:href="Homepage:edit" data-modal="true" class="btn btn-outline-info ajax">Launch edit form in modal</a>
+<a n:href="Homepage:edit" class="btn btn-outline-info ajax">Launch edit form in modal</a>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
 </button>
 
@@ -20,15 +20,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 Test modal body
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
