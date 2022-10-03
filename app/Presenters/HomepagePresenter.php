@@ -38,7 +38,7 @@ final class HomepagePresenter extends Presenter
 			$this->payload->modalActive = true;
 			$this['testForm']->getElementPrototype()->class[] = 'ajax';
 			$this->redrawControl();
-		}		
+		}
 	}
 
 	public function validateTestForm(Form $form, Nette\Utils\ArrayHash $values): void
@@ -57,7 +57,7 @@ final class HomepagePresenter extends Presenter
 
 		if ($this->isAjax()) {
 			$this->payload->modalActive = false;
-			$this->payload->modalRefreshUrl = $this->link('default');    		
+			$this->payload->modalRefreshUrl = $this->link('default');
 			$this->redrawControl();
 		} else {
 			$this->redirect('Homepage:default');
